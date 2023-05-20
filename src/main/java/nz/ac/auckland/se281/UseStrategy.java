@@ -12,10 +12,10 @@ public class UseStrategy {
         this.strategy = strategy;
     }
 
-    public int[] run(){
+    public int[] run(Player player){
         int[] values = new int[2];
         values[0] = strategy.chooseFingers();
-        values[1] = strategy.chooseSum(values[0]);
+        values[1] = strategy.chooseSum(values[0], player);
         return values;
     }
 

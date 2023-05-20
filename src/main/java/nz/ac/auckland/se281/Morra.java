@@ -37,7 +37,7 @@ public class Morra {
         Integer.toString(currentPlayer.getLatestFingers()),
         Integer.toString(currentPlayer.getSum()));
 
-    int[] valuesAI = AI.play();
+    int[] valuesAI = AI.play(currentPlayer);
     MessageCli.PRINT_INFO_HAND.printMessage(
         "Jarvis", Integer.toString(valuesAI[0]), Integer.toString(valuesAI[1]));
 
