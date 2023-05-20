@@ -37,6 +37,8 @@ public class Morra {
         currentPlayer.getName(),
         Integer.toString(currentPlayer.getLatestFingers()),
         Integer.toString(currentPlayer.getSum()));
+
+    round++;
   }
 
   public void showStats() {}
@@ -56,7 +58,11 @@ public class Morra {
         || (Integer.parseInt(input[1]) > 10)) {
       return false;
     }
-
     return true;
   }
+
+  public int getRound(){
+    return round;
+  }
+
 }
