@@ -8,7 +8,7 @@ public class RandomStrategy implements Strategies{
     }
 
     @Override
-    public int chooseSum(int fingers) {
+    public int chooseSum(int fingers, Player currentPlayer) {
         return fingers + Utils.getRandomNumber(1, 5);
     }
 

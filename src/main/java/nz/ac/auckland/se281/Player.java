@@ -31,4 +31,8 @@ public class Player {
     public String getName(){
         return name;
     }
+
+    public List<Integer> getFingersHistory (){
+        return fingersHistory;
+    }
 }
