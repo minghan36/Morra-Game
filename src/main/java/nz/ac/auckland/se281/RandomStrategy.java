@@ -4,7 +4,7 @@ public class RandomStrategy implements Strategies{
 
     @Override
     public int chooseFingers() {
-        return Utils.getRandomNumber(1, 10);
+        return Utils.getRandomNumber(1, 5);
     }
 
     @Override
