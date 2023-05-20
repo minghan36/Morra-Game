@@ -1,17 +1,18 @@
 package nz.ac.auckland.se281;
 
+import java.util.List;
+
 public class TopStrategy implements Strategies{
 
     @Override
     public int chooseFingers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseFingers'");
+        return Utils.getRandomNumber(1, 5);
     }
 
     @Override
     public int chooseSum(int fingers, Player currentPlayer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseSum'");
+        List<Integer> history = currentPlayer.getFingersHistory();
+        history.remove(history.size()-1);
     }
     
 }
