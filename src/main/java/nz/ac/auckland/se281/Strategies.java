@@ -2,7 +2,7 @@ package nz.ac.auckland.se281;
 
 public interface Strategies {
     
-    int chooseFingers();
-    int chooseSum();
+    public int chooseFingers();
+    public int chooseSum(int fingers);
 
 }

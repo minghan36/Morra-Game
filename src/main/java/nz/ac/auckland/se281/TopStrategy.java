@@ -9,7 +9,7 @@ public class TopStrategy implements Strategies{
     }
 
     @Override
-    public int chooseSum() {
+    public int chooseSum(int fingers) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'chooseSum'");
     }

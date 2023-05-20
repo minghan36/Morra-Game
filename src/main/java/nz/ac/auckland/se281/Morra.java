@@ -19,7 +19,6 @@ public class Morra {
 
   public void play() {
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
-    round++;
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
     String[] inputArray = input.trim().split(" ");
@@ -30,13 +29,27 @@ public class Morra {
       input = Utils.scanner.nextLine();
       inputArray = input.trim().split(" ");
     }
-    //Set relevant informtion to the player. Print message accordingly.
+    // Set relevant informtion to the player. Print message accordingly.
     currentPlayer.setFingers(Integer.parseInt(inputArray[0]));
     currentPlayer.setSum(Integer.parseInt(inputArray[1]));
     MessageCli.PRINT_INFO_HAND.printMessage(
         currentPlayer.getName(),
         Integer.toString(currentPlayer.getLatestFingers()),
         Integer.toString(currentPlayer.getSum()));
+
+    int[] valuesAI = AI.play();
+    MessageCli.PRINT_INFO_HAND.printMessage(
+        "Jarvis", Integer.toString(valuesAI[0]), Integer.toString(valuesAI[1]));
+
+    int sum = valuesAI[0] + currentPlayer.getLatestFingers();
+
+    if ((valuesAI[1] == sum) && (currentPlayer.getSum() != sum)){
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+    } else if ((valuesAI[1] != sum) && (currentPlayer.getSum() == sum)){
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+    } else{
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+    }
 
     round++;
   }
@@ -61,8 +74,7 @@ public class Morra {
     return true;
   }
 
-  public int getRound(){
+  public int getRound() {
     return round;
   }
-
 }

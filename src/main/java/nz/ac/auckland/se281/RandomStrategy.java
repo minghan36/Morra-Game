@@ -4,14 +4,12 @@ public class RandomStrategy implements Strategies{
 
     @Override
     public int chooseFingers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseFingers'");
+        return Utils.getRandomNumber(1, 10);
     }
 
     @Override
-    public int chooseSum() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseSum'");
+    public int chooseSum(int fingers) {
+        return fingers + Utils.getRandomNumber(1, 5);
     }
 
 }
