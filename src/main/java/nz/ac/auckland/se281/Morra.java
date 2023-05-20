@@ -19,19 +19,25 @@ public class Morra {
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
     String[] inputArray = input.trim().split(" ");
-    System.out.println(Integer.toString(numbers));
+    //Game asks for Input until user inputs valid values.
+    while (!isValidInput(inputArray)) {
+      MessageCli.INVALID_INPUT.printMessage();
+      MessageCli.ASK_INPUT.printMessage();
+      String inputs = Utils.scanner.nextLine();
+      String[] inputsArray = input.trim().split(" ");
+    }
   }
 
   public void showStats() {}
 
   private boolean isValidInput(String[] input) {
-
+    // Checks that all inputs are integers
     for (String value : input) {
       if (!Utils.isInteger(value)) {
         return false;
       }
     }
-
+    // Checks for other conditions of input
     if ((input.length != 2)
         || (Integer.parseInt(input[0]) < 1)
         || (Integer.parseInt(input[0]) > 5)
