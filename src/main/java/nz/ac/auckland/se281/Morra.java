@@ -5,10 +5,12 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Morra {
 
   private int round;
+  private Player currentPlayer;
 
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
+    currentPlayer = new Player(options[0]);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
   }
@@ -19,13 +21,19 @@ public class Morra {
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
     String[] inputArray = input.trim().split(" ");
-    //Game asks for Input until user inputs valid values.
+    // Game asks for Input until user inputs valid values.
     while (!isValidInput(inputArray)) {
       MessageCli.INVALID_INPUT.printMessage();
       MessageCli.ASK_INPUT.printMessage();
-      String inputs = Utils.scanner.nextLine();
-      String[] inputsArray = input.trim().split(" ");
+      input = Utils.scanner.nextLine();
+      inputArray = input.trim().split(" ");
     }
+    currentPlayer.setFingers(Integer.parseInt(inputArray[0]));
+    currentPlayer.setSum(Integer.parseInt(inputArray[1]));
+    MessageCli.PRINT_INFO_HAND.printMessage(
+        currentPlayer.getName(),
+        Integer.toString(currentPlayer.getLatestFingers()),
+        Integer.toString(currentPlayer.getSum()));
   }
 
   public void showStats() {}

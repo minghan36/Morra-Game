@@ -27,4 +27,8 @@ public class Player {
     public int getLatestFingers(){
         return fingersHistory.get(fingersHistory.size() - 1);
     }
+
+    public String getName(){
+        return name;
+    }
 }
