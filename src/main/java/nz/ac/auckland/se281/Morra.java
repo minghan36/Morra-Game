@@ -6,6 +6,7 @@ public class Morra {
 
   private int round;
   private Player currentPlayer;
+  private AI AI;
 
   public Morra() {}
 
@@ -13,6 +14,7 @@ public class Morra {
     currentPlayer = new Player(options[0]);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
+    AI = AIFactory.createAI(difficulty);
   }
 
   public void play() {
@@ -28,6 +30,7 @@ public class Morra {
       input = Utils.scanner.nextLine();
       inputArray = input.trim().split(" ");
     }
+    //Set relevant informtion to the player. Print message accordingly.
     currentPlayer.setFingers(Integer.parseInt(inputArray[0]));
     currentPlayer.setSum(Integer.parseInt(inputArray[1]));
     MessageCli.PRINT_INFO_HAND.printMessage(
