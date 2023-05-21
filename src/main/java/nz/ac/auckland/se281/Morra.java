@@ -6,7 +6,10 @@ public class Morra {
 
   private int round;
   private Player currentPlayer;
-  private AI AI;
+  private AI AI = null;
+  private int pointsToWin;
+  //Players points in index 0, AI's points in index 1
+  private int[] points = new int[]{0,0};
 
   public Morra() {}
 
@@ -14,10 +17,15 @@ public class Morra {
     currentPlayer = new Player(options[0]);
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
+    this.pointsToWin = pointsToWin;
     AI = AIFactory.createAI(difficulty);
   }
 
   public void play() {
+    if(AI == null){
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
@@ -45,8 +53,20 @@ public class Morra {
 
     if ((valuesAI[1] == sum) && (currentPlayer.getSum() != sum)){
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+      points[1]++;
+      if(points[1] == pointsToWin){
+        MessageCli.END_GAME.printMessage("Jarvis", Integer.toString(round));
+        AI = null;
+        return;
+      }
     } else if ((valuesAI[1] != sum) && (currentPlayer.getSum() == sum)){
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+      points[0]++;
+      if(points[0] == pointsToWin){
+        MessageCli.END_GAME.printMessage(currentPlayer.getName(), Integer.toString(round));
+        AI = null;
+        return;
+      }
     } else{
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
@@ -54,7 +74,14 @@ public class Morra {
     round++;
   }
 
-  public void showStats() {}
+  public void showStats() {
+    if(AI == null){
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+    MessageCli.PRINT_PLAYER_WINS.printMessage(currentPlayer.getName(), Integer.toString(points[0]), Integer.toString(pointsToWin-points[0]));
+    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", Integer.toString(points[1]), Integer.toString(pointsToWin-points[1]));
+  }
 
   private boolean isValidInput(String[] input) {
     // Checks that all inputs are integers
@@ -74,7 +101,5 @@ public class Morra {
     return true;
   }
 
-  public int getRound() {
-    return round;
-  }
+
 }
