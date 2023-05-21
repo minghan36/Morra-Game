@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopStrategy implements Strategies {
@@ -11,7 +12,7 @@ public class TopStrategy implements Strategies {
 
   @Override
   public int chooseSum(int fingers, Player currentPlayer) {
-    List<Integer> history = currentPlayer.getFingersHistory();
+    List<Integer> history = new ArrayList<Integer>(currentPlayer.getFingersHistory());
     history.remove(history.size() - 1);
     int mostPlayed = 0;
     int maxCount = 0;
