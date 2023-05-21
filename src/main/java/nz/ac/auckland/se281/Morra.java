@@ -8,8 +8,8 @@ public class Morra {
   private Player currentPlayer;
   private AI AI = null;
   private int pointsToWin;
-  //Players points in index 0, AI's points in index 1
-  private int[] points = new int[]{0,0};
+  // Players points in index 0, AI's points in index 1
+  private int[] points = new int[] {0, 0};
 
   public Morra() {}
 
@@ -22,7 +22,7 @@ public class Morra {
   }
 
   public void play() {
-    if(AI == null){
+    if (AI == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -51,23 +51,23 @@ public class Morra {
 
     int sum = valuesAI[0] + currentPlayer.getLatestFingers();
 
-    if ((valuesAI[1] == sum) && (currentPlayer.getSum() != sum)){
+    if ((valuesAI[1] == sum) && (currentPlayer.getSum() != sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       points[1]++;
-      if(points[1] == pointsToWin){
+      if (points[1] == pointsToWin) {
         MessageCli.END_GAME.printMessage("Jarvis", Integer.toString(round));
         AI = null;
         return;
       }
-    } else if ((valuesAI[1] != sum) && (currentPlayer.getSum() == sum)){
+    } else if ((valuesAI[1] != sum) && (currentPlayer.getSum() == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       points[0]++;
-      if(points[0] == pointsToWin){
+      if (points[0] == pointsToWin) {
         MessageCli.END_GAME.printMessage(currentPlayer.getName(), Integer.toString(round));
         AI = null;
         return;
       }
-    } else{
+    } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
 
@@ -75,12 +75,16 @@ public class Morra {
   }
 
   public void showStats() {
-    if(AI == null){
+    if (AI == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
-    MessageCli.PRINT_PLAYER_WINS.printMessage(currentPlayer.getName(), Integer.toString(points[0]), Integer.toString(pointsToWin-points[0]));
-    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", Integer.toString(points[1]), Integer.toString(pointsToWin-points[1]));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        currentPlayer.getName(),
+        Integer.toString(points[0]),
+        Integer.toString(pointsToWin - points[0]));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "Jarvis", Integer.toString(points[1]), Integer.toString(pointsToWin - points[1]));
   }
 
   private boolean isValidInput(String[] input) {
@@ -100,6 +104,4 @@ public class Morra {
     }
     return true;
   }
-
-
 }
