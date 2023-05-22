@@ -9,7 +9,7 @@ public class Morra {
   private Opponent opponent = null;
   private int pointsToWin;
   // Players points in index 0, AI's points in index 1
-  private int[] points = new int[] {0, 0};
+  private int[] points;
 
   public Morra() {}
 
@@ -18,6 +18,7 @@ public class Morra {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
     this.pointsToWin = pointsToWin;
+    this.points = new int[] {0,0};
     opponent = OpponentFactory.createOpponent(difficulty);
   }
 
