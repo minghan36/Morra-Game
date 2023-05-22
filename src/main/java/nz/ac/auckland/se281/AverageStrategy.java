@@ -12,7 +12,8 @@ public class AverageStrategy implements Strategies {
 
   @Override
   public int chooseSum(int fingers, Player currentPlayer) {
-    //Creates copy of players finger history and calculates the rounded average not including the current round's input
+    // Creates copy of players finger history and calculates the rounded average not including the
+    // current round's input
     List<Integer> history = new ArrayList<Integer>(currentPlayer.getFingersHistory());
     history.remove(history.size() - 1);
     int sum = 0;

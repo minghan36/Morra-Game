@@ -5,7 +5,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class OpponentFactory {
 
   public static Opponent createOpponent(Difficulty difficulty) {
-    //switch case to set the difficulty of the AI
+    // switch case to set the difficulty of the AI
     switch (difficulty) {
       case EASY:
         return new EasyOpponent();

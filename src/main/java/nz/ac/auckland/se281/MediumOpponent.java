@@ -7,7 +7,7 @@ public class MediumOpponent implements Opponent {
   @Override
   public int[] play(Player player) {
     UseStrategy useStrategy = new UseStrategy(new RandomStrategy());
-    //Sets strategy to AverageStrategy for round 4 and onwards
+    // Sets strategy to AverageStrategy for round 4 and onwards
     if (count > 3) {
       useStrategy.setStrategy(new AverageStrategy());
       return useStrategy.run(player);

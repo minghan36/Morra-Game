@@ -44,13 +44,14 @@ public class Morra {
         currentPlayer.getName(),
         Integer.toString(currentPlayer.getLatestFingers()),
         Integer.toString(currentPlayer.getSum()));
-    //Create values for the AI for fingers and sum using the relevant strategy
+    // Create values for the AI for fingers and sum using the relevant strategy
     int[] valuesOpponent = opponent.play(currentPlayer);
     MessageCli.PRINT_INFO_HAND.printMessage(
         "Jarvis", Integer.toString(valuesOpponent[0]), Integer.toString(valuesOpponent[1]));
 
     int sum = valuesOpponent[0] + currentPlayer.getLatestFingers();
-    //Compares number of fingers to sum to decide whether the round is a draw, or win for either side.
+    // Compares number of fingers to sum to decide whether the round is a draw, or win for either
+    // side.
     if ((valuesOpponent[1] == sum) && (currentPlayer.getSum() != sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       points[1]++;
@@ -79,7 +80,7 @@ public class Morra {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
-    //Prints player information first, then prints AI stats
+    // Prints player information first, then prints AI stats
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         currentPlayer.getName(),
         Integer.toString(points[0]),
