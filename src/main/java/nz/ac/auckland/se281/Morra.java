@@ -18,7 +18,7 @@ public class Morra {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
     this.pointsToWin = pointsToWin;
-    this.points = new int[] {0,0};
+    this.points = new int[] {0, 0};
     opponent = OpponentFactory.createOpponent(difficulty);
   }
 
