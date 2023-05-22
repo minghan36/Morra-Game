@@ -6,7 +6,7 @@ public class Morra {
 
   private int round;
   private Player currentPlayer;
-  private AI AI = null;
+  private Opponent opponent = null;
   private int pointsToWin;
   // Players points in index 0, AI's points in index 1
   private int[] points = new int[] {0, 0};
@@ -18,11 +18,11 @@ public class Morra {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     round = 1;
     this.pointsToWin = pointsToWin;
-    AI = AIFactory.createAI(difficulty);
+    opponent = OpponentFactory.createOpponent(difficulty);
   }
 
   public void play() {
-    if (AI == null) {
+    if (opponent == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -44,27 +44,27 @@ public class Morra {
         currentPlayer.getName(),
         Integer.toString(currentPlayer.getLatestFingers()),
         Integer.toString(currentPlayer.getSum()));
-
-    int[] valuesAI = AI.play(currentPlayer);
+    //Create values for the AI for fingers and sum using the relevant strategy
+    int[] valuesOpponent = opponent.play(currentPlayer);
     MessageCli.PRINT_INFO_HAND.printMessage(
-        "Jarvis", Integer.toString(valuesAI[0]), Integer.toString(valuesAI[1]));
+        "Jarvis", Integer.toString(valuesOpponent[0]), Integer.toString(valuesOpponent[1]));
 
-    int sum = valuesAI[0] + currentPlayer.getLatestFingers();
-
-    if ((valuesAI[1] == sum) && (currentPlayer.getSum() != sum)) {
+    int sum = valuesOpponent[0] + currentPlayer.getLatestFingers();
+    //Compares number of fingers to sum to decide whether the round is a draw, or win for either side.
+    if ((valuesOpponent[1] == sum) && (currentPlayer.getSum() != sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       points[1]++;
       if (points[1] == pointsToWin) {
         MessageCli.END_GAME.printMessage("Jarvis", Integer.toString(round));
-        AI = null;
+        opponent = null;
         return;
       }
-    } else if ((valuesAI[1] != sum) && (currentPlayer.getSum() == sum)) {
+    } else if ((valuesOpponent[1] != sum) && (currentPlayer.getSum() == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       points[0]++;
       if (points[0] == pointsToWin) {
         MessageCli.END_GAME.printMessage(currentPlayer.getName(), Integer.toString(round));
-        AI = null;
+        opponent = null;
         return;
       }
     } else {
@@ -75,10 +75,11 @@ public class Morra {
   }
 
   public void showStats() {
-    if (AI == null) {
+    if (opponent == null) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+    //Prints player information first, then prints AI stats
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         currentPlayer.getName(),
         Integer.toString(points[0]),
